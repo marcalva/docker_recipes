@@ -40,11 +40,17 @@ RUN apt-get install -y libcurl4-gnutls-dev libxml2-dev \
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt install -y nodejs
 
-ENV NVIM_REPO="https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage"
+RUN sudo add-apt-repository ppa:neovim-ppa/stable && \
+    sudo apt-get update && \
+    sudo apt-get install neovim
 
-RUN cd $HOME && wget $NVIM_REPO && \
-    chmod u+x nvim.appimage && \
-    mv nvim.appimage /usr/local/bin/nvim
+# ENV NVIM_REPO="https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage"
+# 
+# RUN cd $HOME && wget $NVIM_REPO && \
+#     chmod u+x nvim.appimage && \
+#     ./nvim.appimage --appimage-extract && \
+#     mv ./squashfs-root/usr/bin/nvim /usr/local/bin/nvim && \
+#     mv nvim.appimage /usr/local/bin/nvim
 
 RUN cd $HOME && mkdir -p .config/ && cd .config/ && \
     git clone  https://github.com/marcalva/nvim_config.git nvim && \
@@ -77,9 +83,9 @@ RUN cache_dir=$(mktemp -d -p "$PWD") && \
 # R
 RUN apt install -y --no-install-recommends dirmngr
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc \
-    | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc && \
-    sudo add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" && \
-    apt-get install -y r-base r-base-core r-recommended r-base-dev
+    | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+RUN add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
+RUN apt-get install -y r-base r-base-core r-recommended r-base-dev
 
 RUN R -e "repo = 'http://cran.us.r-project.org'; \
     install.packages('remotes', repos = repo); \
@@ -119,8 +125,12 @@ RUN cd $HOME && \
 # mamba
 RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | \
     tar -xvj  bin/micromamba && \
-    sudo mv bin/micromamba /usr/local/bin/ && \
+    mv bin/micromamba /usr/local/bin/ && \
     rm -rf bin
+
+COPY ./my_bashrc.sh /home/ubuntu/my_bashrc.sh
+
+RUN cat /home/ubuntu/my_bashrc.sh >> /root/.bashrc
 
 # run with:
 # sudo docker run --rm --gpus=all --ipc=host --detach-keys "ctrl-p" \

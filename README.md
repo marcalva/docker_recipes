@@ -11,3 +11,10 @@ This recipe builds a docker image with my preferred setup, including
 - R (latest) and tidyverse packages,
 - bat, ripgrep, fd-find, and fzf,
 - mamba.
+
+To build the docker image
+```bash
+git clone https://github.com/marcalva/docker_recipes.git
+cd nvidia_dev
+docker build -t nvidia_dev:1.0 .
+```
