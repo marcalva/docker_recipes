@@ -40,9 +40,9 @@ RUN apt-get install -y libcurl4-gnutls-dev libxml2-dev \
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt install -y nodejs
 
-RUN sudo add-apt-repository ppa:neovim-ppa/stable && \
-    sudo apt-get update && \
-    sudo apt-get install neovim
+RUN add-apt-repository ppa:neovim-ppa/stable && \
+    apt-get update && \
+    apt-get install neovim
 
 # ENV NVIM_REPO="https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage"
 # 
