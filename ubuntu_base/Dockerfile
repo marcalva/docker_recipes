@@ -29,7 +29,7 @@ RUN apt-get install -y libcurl4-gnutls-dev libxml2-dev \
     libtiff-dev libjpeg-dev libpng-dev \
     libfontconfig1-dev \
     bzip2 liblzma-dev liblzma5 \
-    curl \
+    curl wget \
     ncurses-base libncurses-dev \
     gettext \
     libfuse3-3 libfuse3-dev fuse \
