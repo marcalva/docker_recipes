@@ -63,10 +63,19 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     ./aws/install && \
     rm -rf awscliv2.zip aws
 
-RUN apt-get install -y \
-    python3.10-dev \
-    python3.10-distutils \
-    python3.10-venv
+
+# get python 3.10
+# install current version of pip to /home/ubuntu/.local/lib/python3.10/
+RUN add-apt-repository -y ppa:deadsnakes/ppa && \
+    apt update && \
+    apt-get install -y python3.10-full python3.10-dev \
+        python3.10-distutils \
+        python3-pip \
+        python3-venv \
+        python3.10-dev \
+        python3.10-distutils \
+        python3.10-venv && \
+    python3.10 -m ensurepip --upgrade
 
 RUN cache_dir=$(mktemp -d -p "$PWD") && \
     pip3 install --cache-dir "$cache_dir" pandas \
