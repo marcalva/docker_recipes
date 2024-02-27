@@ -4,10 +4,10 @@ FROM ubuntu:20.04
 ENV TERM linux
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update
-RUN apt-get upgrade
-RUN apt-get update
-RUN apt-get install
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get update -y
+RUN apt-get install -y
 
 SHELL ["/bin/bash"]
 
