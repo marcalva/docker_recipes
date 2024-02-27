@@ -1,6 +1,8 @@
 # Build a docker file from the NVIDIA PyTorch image
 FROM ubuntu:20.04
 
+SHELL ["/bin/bash", "-c"]
+
 # install
 RUN apt-get update -y && apt-get upgrade -y
 
