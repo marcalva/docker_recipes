@@ -56,6 +56,8 @@ RUN cd $HOME && mkdir -p .config/ && cd .config/ && \
     cd ../ && \
     nvim -c 'Lazy install' -c 'sleep 20' -c qa --headless
 
+RUN apt-get install -y unzip zip
+
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
