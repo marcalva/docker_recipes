@@ -107,6 +107,8 @@ RUN R -e "repo = 'http://cran.us.r-project.org'; \
     remotes::install_cran('tidyverse', repos = repo, upgrade = 'never')"
 
 RUN cd $HOME && \
+    echo "$HOME" && \
+    cat /etc/bash.bashrc && \
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rust_i.sh && \
     chmod u+x rust_i.sh && \
     ./rust_i.sh -y && \
