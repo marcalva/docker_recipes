@@ -53,6 +53,7 @@ RUN apt-get install -y libcurl4-gnutls-dev libxml2-dev \
     xauth \
     shellcheck \
     zip unzip \
+    python3-pip \
     vim
 
 # R
@@ -83,7 +84,8 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | \
     tar -xvj bin/micromamba && \
     mv ${HOME}/bin/micromamba /usr/local/bin/ && \
-    rm -rf ${HOME}/bin
+    rm -rf ${HOME}/bin && \
+    pip install conda-lock
 
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt install -y nodejs

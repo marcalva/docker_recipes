@@ -33,8 +33,7 @@ RUN apt-get install -y \
     clangd \
     gdb \
     dpkg-repack \
-    man-db manpages \
-    nfs-common
+    man-db manpages
 
 RUN apt-get install -y \
     git git-lfs \
@@ -70,55 +69,59 @@ RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | \
     pip install conda-lock && \
     micromamba shell init --shell bash --root-prefix=~/micromamba
 
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt install -y nodejs
+COPY environment.yml ${HOME}/
+RUN micromamba create -y -f environment.yml && \
+    micromamba clean -afy
 
-RUN npm i -g bash-language-server
-
-# fzf
-RUN cd $HOME && \
-    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
-    .fzf/install \
-        --all \
-        --key-bindings \
-        --completion \
-        --update-rc \
-        --no-zsh \
-        --no-fish
-
-# rust
-RUN cd $HOME && \
-    echo "$HOME" && \
-    cat /etc/bash.bashrc && \
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rust_i.sh && \
-    chmod u+x rust_i.sh && \
-    ./rust_i.sh -y && \
-    rm rust_i.sh
-
-# bat, ripgrep, fd-find
-RUN cd $HOME && \
-    . "$HOME/.cargo/env" && \
-    echo $PATH && \
-    cargo install --locked bat && \
-    cargo install ripgrep && \
-    cargo install fd-find && \
-    cargo install shellharden
-
-# neovim
-RUN wget "https://github.com/neovim/neovim/archive/refs/tags/nightly.tar.gz" && \
-    tar -xzf nightly.tar.gz && \
-    rm nightly.tar.gz && \
-    cd ./neovim-nightly && \
-    make CMAKE_BUILD_TYPE=Release && \
-    make install && \
-    cd ../ && \
-    rm -rf neovim-nightly
-
-RUN mkdir -p .config/ && cd .config/ && \
-    git clone  https://github.com/marcalva/nvim_config.git nvim && \
-    cd ../ && \
-    nvim -c 'Lazy install' -c 'sleep 20' -c qa --headless
-
-VOLUME /workspace
-WORKDIR /workspace
-
+# RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+#     apt install -y nodejs
+# 
+# RUN npm i -g bash-language-server
+# 
+# # fzf
+# RUN cd $HOME && \
+#     git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
+#     .fzf/install \
+#         --all \
+#         --key-bindings \
+#         --completion \
+#         --update-rc \
+#         --no-zsh \
+#         --no-fish
+# 
+# # rust
+# RUN cd $HOME && \
+#     echo "$HOME" && \
+#     cat /etc/bash.bashrc && \
+#     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > rust_i.sh && \
+#     chmod u+x rust_i.sh && \
+#     ./rust_i.sh -y && \
+#     rm rust_i.sh
+# 
+# # bat, ripgrep, fd-find
+# RUN cd $HOME && \
+#     . "$HOME/.cargo/env" && \
+#     echo $PATH && \
+#     cargo install --locked bat && \
+#     cargo install ripgrep && \
+#     cargo install fd-find && \
+#     cargo install shellharden
+# 
+# # neovim
+# RUN wget "https://github.com/neovim/neovim/archive/refs/tags/nightly.tar.gz" && \
+#     tar -xzf nightly.tar.gz && \
+#     rm nightly.tar.gz && \
+#     cd ./neovim-nightly && \
+#     make CMAKE_BUILD_TYPE=Release && \
+#     make install && \
+#     cd ../ && \
+#     rm -rf neovim-nightly
+# 
+# RUN mkdir -p .config/ && cd .config/ && \
+#     git clone  https://github.com/marcalva/nvim_config.git nvim && \
+#     cd ../ && \
+#     nvim -c 'Lazy install' -c 'sleep 20' -c qa --headless
+# 
+# VOLUME /workspace
+# WORKDIR /workspace
+# 
