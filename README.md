@@ -31,6 +31,18 @@ docker pull ghcr.io/marcalva/IMAGE_NAME:TAG
 For pushing, you need to login with `docker login`. For pulling,
 you may need to login as well.
 
+## `ubuntu_base`
+
+This repo stores a minimal development environment with nvim and LSPs
+in `ghcr.io/marcalva/ubuntu_base`.
+
+## `pytorch`
+
+To generate the lock file for the mamba environment, run
+```bash
+conda-lock -f environment.yml -p linux-64
+```
+
 ## nvidia_dev
 
 Use this image to run pytorch on NVIDIA GPUs. It has both CUDA and
@@ -57,7 +69,7 @@ environment, include `--system-site-packages torch`
 
 To run the image, use
 ```bash
-docker run --privileged --rm --gpus=all --ipc=host -it \
+udo ocker run --rm --gpus=all --ipc=host -it \
     -v /home/ubuntu/:/home/ubuntu/ 5154aff3a520 /bin/bash
 ```
 The docker image ID might be different. You need to 

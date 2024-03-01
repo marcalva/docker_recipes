@@ -2,6 +2,9 @@
 # syntax=docker/dockerfile:1
 FROM ubuntu:22.04
 
+LABEL version=1.1
+
+ENV SHELL /bin/bash
 ENV TERM xterm-256color
 
 ENV HOME /root
@@ -17,6 +20,9 @@ ENV LANG="C.UTF-8" \
 
 # baskic packages
 RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    gcc \
+    clangd \
     man-db \
     manpages \
     git \
@@ -35,6 +41,14 @@ RUN apt-get update && apt-get install -y \
     fd-find && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && \
+    add-apt-repository -y ppa:deadsnakes/ppa && \
+    apt-get update && \
+    apt-get install -y \
+    python3-distutils \
+    python3-pip && \
+    rm -rf /var/lib/apt/lists/*
+
 # awscli
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
@@ -42,17 +56,14 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     rm -rf awscliv2.zip aws
 
 # mamba
-RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | \
-    tar -xvj bin/micromamba && \
-    mv ${HOME}/bin/micromamba /usr/local/bin/ && \
-    rm -rf ${HOME}/bin && \
-    apt-get update && apt-get install -y \
-    python3-pip && \
-    rm -rf /var/lib/apt/lists/* && \
-    pip install conda-lock && \
-    apt-get purge -y --auto-remove \
-    python3-pip && \
-    apt autoclean -y
+# RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | \
+#     tar -xvj bin/micromamba && \
+#     mv ${HOME}/bin/micromamba /usr/local/bin/ && \
+#     rm -rf ${HOME}/bin && \
+#     pip install conda-lock
+RUN curl -L "micro.mamba.pm/install.sh" -o "install.sh" && \
+    "$SHELL" install.sh && \
+    rm install.sh
 
 # neovim
 RUN apt-get update && apt-get install -y \
