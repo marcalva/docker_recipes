@@ -1,0 +1,25 @@
+name: torch
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+dependencies:
+  - python=3.10.13
+  - pytorch=2.2.1
+  - pytorch-cuda=12.1
+  - pip
+  - datasets
+  - transformers
+  - pandas
+  - numpy
+  - scikit-learn
+  - ipython
+  - tqdm
+  - ipywidgets
+  - anndata
+  - scanpy
+  - umap-learn
+  - matplotlib
+  - python-lsp-black
+  - flake8
+  - pyright
