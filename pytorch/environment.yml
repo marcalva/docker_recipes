@@ -1,4 +1,4 @@
-name: py_r_torch
+name: torch
 channels:
   - conda-forge
   - pytorch

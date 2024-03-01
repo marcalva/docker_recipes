@@ -55,16 +55,6 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     ./aws/install && \
     rm -rf awscliv2.zip aws
 
-# mamba
-# RUN curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | \
-#     tar -xvj bin/micromamba && \
-#     mv ${HOME}/bin/micromamba /usr/local/bin/ && \
-#     rm -rf ${HOME}/bin && \
-#     pip install conda-lock
-RUN curl -L "micro.mamba.pm/install.sh" -o "install.sh" && \
-    "$SHELL" install.sh && \
-    rm install.sh
-
 # neovim
 RUN apt-get update && apt-get install -y \
     cmake \
@@ -115,3 +105,26 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     rm -rf /var/lib/apt/lists/* && \
     npm i -g bash-language-server
 
+# mamba
+ENV MAMBA_ROOT_PREFIX="/opt/conda"
+ENV MAMBA_EXE="/usr/local/bin/micromamba"
+COPY _mamba_sh.sh /usr/local/bin/_mamba_sh.sh
+RUN curl -Ls curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | \
+    tar -xvj bin/micromamba && \
+    mv bin/micromamba ${MAMBA_EXE} && \
+    rm -rf bin && \
+    mkdir -p "$MAMBA_ROOT_PREFIX" && \
+    echo "source /usr/local/bin/_mamba_sh.sh" >> ~/.bashrc && \
+    pip install conda-lock
+
+COPY _entry.sh /usr/local/bin/_entry.sh
+ENTRYPOINT ["/usr/local/bin/_entry.sh"]
+# ENTRYPOINT ["bash", "-c", "source /usr/local/bin/_mamba_sh.sh && exec $@"]
+# ENTRYPOINT "source /usr/local/bin/_mamba_sh.sh && exec $@"
+
+# Default command for "docker run"
+CMD ["/bin/bash"]
+
+# Script which launches RUN commands in Dockerfile
+# COPY _dockerfile_shell.sh /usr/local/bin/_dockerfile_shell.sh
+# SHELL ["/usr/local/bin/_dockerfile_shell.sh"]
