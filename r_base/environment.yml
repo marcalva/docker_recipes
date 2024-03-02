@@ -1,0 +1,12 @@
+name: r_base
+channels:
+  - conda-forge
+dependencies:
+  - r
+  - radian
+  - r-languageserver
+  - r-lintr
+  - r-styler
+  - r-devtools
+  - r-tidyverse
+  - r-seurat
