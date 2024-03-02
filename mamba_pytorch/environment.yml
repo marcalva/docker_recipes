@@ -7,9 +7,13 @@ dependencies:
   - python=3.10.13
   - pytorch=2.2.1
   - pytorch-cuda=12.1
+  - cuda-toolkit=12.1
   - pip
   - datasets
   - transformers
+  - ninja
+  - pyarrow
+  - accelerate
   - pandas
   - numpy
   - scikit-learn
@@ -17,9 +21,11 @@ dependencies:
   - tqdm
   - ipywidgets
   - anndata
+  - loompy
   - scanpy
   - umap-learn
   - matplotlib
+  - seaborn
   - python-lsp-black
   - flake8
   - pyright

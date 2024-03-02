@@ -10,6 +10,12 @@ dependencies:
   - pip
   - datasets
   - transformers
+  - ray
+  - flash-attn
+  - pyarrow
+  - accelerate
+  - cellxgene_census
+  - tiledbsoma
   - pandas
   - numpy
   - scikit-learn
@@ -17,9 +23,11 @@ dependencies:
   - tqdm
   - ipywidgets
   - anndata
+  - loompy
   - scanpy
   - umap-learn
   - matplotlib
+  - seaborn
   - python-lsp-black
   - flake8
   - pyright
