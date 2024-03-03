@@ -45,6 +45,7 @@ RUN apt-get update && \
     add-apt-repository -y ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y \
+    python3-venv \
     python3-distutils \
     python3-pip && \
     rm -rf /var/lib/apt/lists/*
@@ -104,6 +105,8 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get update && apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/* && \
     npm i -g bash-language-server
+
+RUN pip install pyright flake8
 
 # mamba
 ENV MAMBA_ROOT_PREFIX="/opt/conda"

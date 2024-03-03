@@ -1,4 +1,3 @@
-# Build a docker file Ubuntu base image
 # syntax=docker/dockerfile:1
 FROM nvcr.io/nvidia/pytorch:24.02-py3
 
@@ -18,7 +17,7 @@ ENV LANG="C.UTF-8" \
     TZ="PST" \
     DEBIAN_FRONTEND=noninteractive
 
-# baskic packages
+# basic packages
 RUN apt-get update && apt-get install -y \
     software-properties-common \
     gcc \
@@ -45,6 +44,7 @@ RUN apt-get update && \
     add-apt-repository -y ppa:deadsnakes/ppa && \
     apt-get update && \
     apt-get install -y \
+    python3-venv \
     python3-distutils \
     python3-pip && \
     rm -rf /var/lib/apt/lists/*
@@ -107,12 +107,5 @@ RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
 
 RUN pip install pyright flake8
 
-# ENTRYPOINT ["bash", "-c", "source /usr/local/bin/_mamba_sh.sh && exec $@"]
-# ENTRYPOINT "source /usr/local/bin/_mamba_sh.sh && exec $@"
-
 # Default command for "docker run"
 CMD ["/bin/bash"]
-
-# Script which launches RUN commands in Dockerfile
-# COPY _dockerfile_shell.sh /usr/local/bin/_dockerfile_shell.sh
-# SHELL ["/usr/local/bin/_dockerfile_shell.sh"]
