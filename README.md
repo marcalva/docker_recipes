@@ -69,7 +69,7 @@ environment, include `--system-site-packages torch`
 
 To run the image, use
 ```bash
-udo ocker run --rm --gpus=all --ipc=host -it \
+sudo docker run --rm --gpus=all --ipc=host -it \
     -v /home/ubuntu/:/home/ubuntu/ 5154aff3a520 /bin/bash
 ```
 The docker image ID might be different. You need to 
