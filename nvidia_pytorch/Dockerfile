@@ -1,8 +1,7 @@
-# Build a docker file Ubuntu base image
 # syntax=docker/dockerfile:1
-FROM ubuntu:22.04
+FROM nvcr.io/nvidia/pytorch:24.02-py3
 
-LABEL version=1.2
+LABEL version=1.1
 
 ENV SHELL /bin/bash
 ENV TERM xterm-256color

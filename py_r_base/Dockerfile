@@ -1,14 +1,12 @@
 # Build a docker file Ubuntu base image
 # syntax=docker/dockerfile:1
-FROM ghcr.io/marcalva/ubuntu_base:1.1
+FROM ghcr.io/marcalva/ubuntu_base:1.2
 
-LABEL version=1.0
+LABEL version=1.1
 
 SHELL ["/bin/bash", "-c"]
 
-VOLUME /workspace
-
-WORKDIR "$HOME"
+USER root
 
 # required development libraries
 RUN apt-get update -y && apt-get install -y \
@@ -99,3 +97,8 @@ RUN git clone https://github.com/samtools/bcftools && \
     make install && \
     cd ../ && \
     rm -rf bcftools
+
+USER ubuntu
+
+# Default command for "docker run"
+CMD ["/bin/bash"]
