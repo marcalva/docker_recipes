@@ -100,5 +100,7 @@ RUN git clone https://github.com/samtools/bcftools && \
 
 USER ubuntu
 
+RUN echo 'export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+
 # Default command for "docker run"
 CMD ["/bin/bash"]
