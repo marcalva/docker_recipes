@@ -6,4 +6,4 @@ if type nvidia-smi &> /dev/null; then
 fi
 
 sudo docker run --rm $gpus --ipc=host -it --detach-keys="ctrl-@" \
-    -v $HOME:/workspace ghcr.io/marcalva/scfm:1.0 /bin/bash
+    -v $HOME:/workspace ghcr.io/marcalva/scfm:1.1 /bin/bash
