@@ -2,7 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM ghcr.io/marcalva/ubuntu_base:1.2
 
-LABEL version=1.1
+LABEL version=1.2
 
 SHELL ["/bin/bash", "-c"]
 
@@ -27,6 +27,12 @@ RUN apt-get update -y && apt-get install -y \
     libssl-dev \
     ncurses-base \
     libncurses-dev \
+    libcurl4-openssl-dev \
+    libxml2-dev \
+    libgsl27 \
+    libgsl-dev \
+    libcairo2 \
+    libcairo2-dev \
     gettext && \
     rm -rf /var/lib/apt/lists/*
 
@@ -45,7 +51,7 @@ RUN Rscript -e 'update.packages(ask = FALSE, checkBuilt = TRUE)'
 
 COPY r_install_pkgs.R /opt/r_install_pkgs.R
 
-RUN Rscript /opt/r_install_pkgs.R && rm /opt/r_install_pkgs.R
+RUN Rscript /opt/r_install_pkgs.R && rm /opt/r_install_pkgs.R || exit 1
 
 # Python
 RUN apt-get update -y && apt-get install -y \
