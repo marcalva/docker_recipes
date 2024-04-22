@@ -2,7 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM ghcr.io/marcalva/nvidia_pytorch:1.1
 
-LABEL version=1.1
+LABEL version=1.2
 
 SHELL ["/bin/bash", "-c"]
 

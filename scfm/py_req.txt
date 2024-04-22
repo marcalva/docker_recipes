@@ -13,10 +13,12 @@ scanpy
 loompy
 pyarrow
 cellxgene_census
+transformers
 accelerate
 pyaml
 tiledbsoma
 intervaltree
+pysam
 python-lsp-black
 flake8
 pyright
