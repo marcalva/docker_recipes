@@ -1,8 +1,8 @@
 # Build a docker file Ubuntu base image
 # syntax=docker/dockerfile:1
-FROM ghcr.io/marcalva/py_r_base:1.2
+FROM ghcr.io/marcalva/py_r_base:1.3
 
-LABEL version=1.0
+LABEL version=1.1
 
 SHELL ["/bin/bash", "-c"]
 
