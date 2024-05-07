@@ -1,11 +1,16 @@
 wheel
+Cython
 matplotlib
 matplotlib-venn
 umap-learn
-scanpy
+scanpy >= 1.4.0
+leidenalg
 h5py
-pandas
-numpy
+pandas >= 2.0.0, < 2.2.0
+numpy >= 1.21.0
+snapatac2 >= 2.6.0
+harmonypy
+xgboost >= 2.0.0
 ipython
-llvmlite==0.38.1
+llvmlite == 0.38.1
 gdown
