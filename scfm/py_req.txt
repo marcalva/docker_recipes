@@ -13,6 +13,7 @@ scanpy
 loompy
 pyarrow
 cellxgene_census
+scvi-tools
 transformers
 accelerate
 pyaml
