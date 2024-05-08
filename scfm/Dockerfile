@@ -82,6 +82,8 @@ COPY py_req.txt /opt/py_req.txt
 
 RUN pip install -r /opt/py_req.txt && rm /opt/py_req.txt
 
+ENV MAMBA_ROOT_PREFIX="/home/ubuntu/.mamba"
+
 # switch back to user
 USER ubuntu
 
