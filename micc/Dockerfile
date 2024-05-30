@@ -2,7 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM ghcr.io/marcalva/py_r_base:1.3
 
-LABEL version=1.0
+LABEL version=1.1
 
 SHELL ["/bin/bash", "-c"]
 
@@ -93,10 +93,10 @@ RUN git clone https://github.com/statgen/popscle.git && \
 # plink
 #=======================================
 
-RUN wget https://s3.amazonaws.com/plink2-assets/plink2_linux_amd_avx2_20240418.zip && \
-    unzip plink2_linux_amd_avx2_20240418.zip && \
+RUN wget https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_amd_avx2_20240526.zip && \
+    unzip plink2_linux_amd_avx2_20240526.zip && \
     mv plink2 /usr/local/bin && \
-    rm plink2_linux_amd_avx2_20240418.zip
+    rm plink2_linux_amd_avx2_20240526.zip
 
 # plink pgenlib
 RUN git clone https://github.com/chrchang/plink-ng.git && \
