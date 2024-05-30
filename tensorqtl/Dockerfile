@@ -20,16 +20,20 @@ RUN apt-get update -y && \
 # Python packages
 #=======================================
 
-RUN pip install tensorqtl Cython
+RUN pip install tensorqtl Cython rpy2
+
+#=======================================
+# Python packages
+#=======================================
 
 #=======================================
 # plink
 #=======================================
 
-RUN wget https://s3.amazonaws.com/plink2-assets/plink2_linux_amd_avx2_20240418.zip && \
-    unzip plink2_linux_amd_avx2_20240418.zip && \
+RUN wget https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_amd_avx2_20240105.zip && \
+    unzip plink2_linux_amd_avx2_20240105.zip && \
     mv plink2 /usr/local/bin && \
-    rm plink2_linux_amd_avx2_20240418.zip
+    rm plink2_linux_amd_avx2_20240105.zip
 
 # plink pgenlib
 RUN git clone https://github.com/chrchang/plink-ng.git && \
