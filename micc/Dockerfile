@@ -2,7 +2,7 @@
 # syntax=docker/dockerfile:1
 FROM ghcr.io/marcalva/py_r_base:1.3
 
-LABEL version=1.1
+LABEL version=1.2
 
 SHELL ["/bin/bash", "-c"]
 
@@ -34,6 +34,19 @@ RUN Rscript /opt/r_install_pkgs.R && rm /opt/r_install_pkgs.R || exit 1
 COPY py_req.txt /opt/py_req.txt
 
 RUN pip install -r /opt/py_req.txt && rm /opt/py_req.txt
+
+#=======================================
+# bedtools
+#=======================================
+
+RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.31.1/bedtools-2.31.1.tar.gz && \
+    tar -xzf bedtools-2.31.1.tar.gz && \
+    rm bedtools-2.31.1.tar.gz && \
+    cd bedtools2 && \
+    make && \
+    mv bin/* /usr/local/bin/ && \
+    cd ../ && \
+    rm -rf bedtools2
 
 #=======================================
 # ambimux

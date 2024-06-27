@@ -14,3 +14,5 @@ xgboost >= 2.0.0
 llvmlite >= 0.42.0
 gdown >= 5.2.0
 ipython >= 8.24.0
+intervaltree >= 3.1.0
+pyranges >= 0.1.2
