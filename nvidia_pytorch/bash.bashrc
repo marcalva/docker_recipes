@@ -73,3 +73,10 @@ fi
 # my config
 alias vim=nvim
 alias ls='ls --color=auto'
+export EDITOR=vim
+alias fd=fdfind
+eval "$(fzf --bash)"
+export FZF_CTRL_T_OPTS="
+	--walker-skip .git,node_modules,target
+	--preview 'bat -n --color=always {}'
+	--bind 'ctrl-/:change-preview-window(down|hidden|)'"

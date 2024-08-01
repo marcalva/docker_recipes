@@ -1,6 +1,6 @@
 # Build a docker file Ubuntu base image
 # syntax=docker/dockerfile:1
-FROM ghcr.io/marcalva/nvidia_pytorch:1.1
+FROM ghcr.io/marcalva/nvidia_pytorch:1.2
 
 LABEL version=1.2
 
@@ -68,6 +68,18 @@ RUN git clone https://github.com/samtools/bcftools && \
     cd ../ && \
     rm -rf bcftools
 
+#=======================================
+# bedtools
+#=======================================
+
+RUN wget https://github.com/arq5x/bedtools2/releases/download/v2.31.1/bedtools-2.31.1.tar.gz && \
+    tar -xzf bedtools-2.31.1.tar.gz && \
+    cd bedtools2 && \
+    make && \
+    mv bin/* /usr/local/bin/ && \
+    cd ../ && \
+    rm -rf bedtools2 bedtools-2.31.1.tar.gz
+
 # Python
 RUN apt-get update -y && apt-get install -y \
     python3-pip \
@@ -83,6 +95,14 @@ COPY py_req.txt /opt/py_req.txt
 RUN pip install -r /opt/py_req.txt && rm /opt/py_req.txt
 
 ENV MAMBA_ROOT_PREFIX="/home/ubuntu/.mamba"
+
+#=======================================
+# UCSC bin utils
+#=======================================
+
+RUN wget http://hgdownload.soe.ucsc.edu/admin/exe/linux.x86_64/bigBedToBed && \
+    mv bigBedToBed /usr/local/bin && \
+    chmod a+x /usr/local/bin/bigBedToBed
 
 # switch back to user
 USER ubuntu

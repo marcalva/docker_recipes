@@ -1,8 +1,9 @@
 # Build a docker file Ubuntu base image
 # syntax=docker/dockerfile:1
+# FROM ghcr.io/marcalva/py_r_base:1.3
 FROM ghcr.io/marcalva/py_r_base:1.3
 
-LABEL version=1.0
+LABEL version=1.1
 
 SHELL ["/bin/bash", "-c"]
 
@@ -20,11 +21,16 @@ RUN apt-get update -y && \
 # Python packages
 #=======================================
 
-RUN pip install tensorqtl Cython rpy2
+RUN pip install --upgrade pip && \
+    pip install tensorqtl Cython rpy2
 
 #=======================================
-# Python packages
+# R packages
 #=======================================
+
+COPY r_install_pkgs.R /opt/r_install_pkgs.R
+
+RUN Rscript /opt/r_install_pkgs.R && rm /opt/r_install_pkgs.R || exit 1
 
 #=======================================
 # plink
