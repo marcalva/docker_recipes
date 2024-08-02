@@ -17,7 +17,7 @@ is the classic personal access token with package read/write access. In the
 
 ```bash
 export CR_PAT=YOUR_TOKEN
-echo "$CR_PAT" | docker login ghcr.io -u marcalva --password-stdin
+echo "$CR_PAT" | sudo docker login ghcr.io -u marcalva --password-stdin
 docker push ghcr.io/marcalva/IMAGE_NAME:TAG
 ```
 

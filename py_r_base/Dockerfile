@@ -1,6 +1,6 @@
 # Build a docker file Ubuntu base image
 # syntax=docker/dockerfile:1
-FROM ghcr.io/marcalva/ubuntu_base:1.2
+FROM ghcr.io/marcalva/ubuntu_base:1.3
 
 LABEL version=1.3
 
