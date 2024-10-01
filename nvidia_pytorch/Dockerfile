@@ -89,8 +89,8 @@ RUN pip install basedpyright flake8 black neovim
 # neovim
 RUN wget https://github.com/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz && \
     tar -C /opt -xzf nvim-linux64.tar.gz && \
-    rm nvim-linux64.tar.gz && \
-    ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim
+    ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim && \
+    rm nvim-linux64.tar.gz
 
 # RUN wget "https://github.com/neovim/neovim/archive/refs/tags/nightly.tar.gz" && \
 #     tar -xzf nightly.tar.gz && \
