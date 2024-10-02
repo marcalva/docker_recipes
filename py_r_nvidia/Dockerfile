@@ -1,14 +1,17 @@
-# Build a docker file Ubuntu base image
+# Build a docker file from nvidia pytorch
 # syntax=docker/dockerfile:1
-FROM ghcr.io/marcalva/ubuntu_base:1.3
+FROM ghcr.io/marcalva/nvidia_pytorch:1.3
 
-LABEL version=1.4
+LABEL version=1.0
 
 SHELL ["/bin/bash", "-c"]
 
 USER root
 
+#=================================================
 # required development libraries
+#=================================================
+
 RUN apt-get update -y && apt-get install -y \
     software-properties-common \
     dirmngr \
@@ -37,7 +40,10 @@ RUN apt-get update -y && apt-get install -y \
     gettext && \
     rm -rf /var/lib/apt/lists/*
 
+#=================================================
 # R
+#=================================================
+
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | \
     tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc && \
     add-apt-repository -y "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
@@ -54,25 +60,18 @@ COPY r_install_pkgs.R /opt/r_install_pkgs.R
 
 RUN Rscript /opt/r_install_pkgs.R && rm /opt/r_install_pkgs.R || exit 1
 
+#=================================================
 # Python
-RUN apt-get update -y && apt-get install -y \
-    python3-pip \
-    python3-distutils \
-    python3-venv && \
-    rm -rf /var/lib/apt/lists/*
+#=================================================
 
 RUN python3 -m pip install --upgrade pip && \
     pip install --upgrade setuptools
-
-RUN add-apt-repository -y ppa:deadsnakes/ppa && \
-    apt-get update -y
 
 COPY py_req.txt /opt/py_req.txt
 
 RUN pip install -r /opt/py_req.txt && rm /opt/py_req.txt
 
 RUN --mount=type=secret,id=github_token \
-    echo "Building claude tools" && \
     export GH_TOKEN=$(cat /run/secrets/github_token) && \
     if [ -n "${GH_TOKEN}" ]; then \
         pip install --no-cache-dir git+https://${GH_TOKEN}@github.com/marcalva/claude-chat.git && \
@@ -83,13 +82,19 @@ RUN --mount=type=secret,id=github_token \
     fi && \
     unset GH_TOKEN
 
+#=================================================
+#=================================================
+
 RUN apt-get update -y && apt-get install -y \
     build-essential \
     autoconf automake libtool autotools-dev libtool-bin \
     cmake clangd gdb && \
     rm -rf /var/lib/apt/lists/*
 
+#=================================================
 # htslib
+#=================================================
+
 RUN git clone https://github.com/samtools/htslib && \
     cd htslib && \
     git submodule update --init --recursive && \
@@ -100,7 +105,10 @@ RUN git clone https://github.com/samtools/htslib && \
     cd ../ && \
     rm -rf htslib
 
+#=================================================
 # samtools
+#=================================================
+
 RUN git clone https://github.com/samtools/samtools && \
     cd samtools && \
     autoreconf && \
@@ -110,7 +118,10 @@ RUN git clone https://github.com/samtools/samtools && \
     cd ../ && \
     rm -rf samtools
 
+#=================================================
 # bcftools
+#=================================================
+
 RUN git clone https://github.com/samtools/bcftools && \
     cd bcftools && \
     autoreconf && \

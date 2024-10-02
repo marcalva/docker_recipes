@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM nvcr.io/nvidia/pytorch:24.02-py3
 
-LABEL version=1.2
+LABEL version=1.3
 
 ENV SHELL=/bin/bash
 ENV TERM=xterm-256color
@@ -91,15 +91,6 @@ RUN wget https://github.com/neovim/neovim/releases/download/v0.10.1/nvim-linux64
     tar -C /opt -xzf nvim-linux64.tar.gz && \
     ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim && \
     rm nvim-linux64.tar.gz
-
-# RUN wget "https://github.com/neovim/neovim/archive/refs/tags/nightly.tar.gz" && \
-#     tar -xzf nightly.tar.gz && \
-#     rm nightly.tar.gz && \
-#     cd ./neovim-nightly && \
-#     make CMAKE_BUILD_TYPE=Release && \
-#     make install && \
-#     cd ../ && \
-#     rm -rf neovim-nightly
 
 # shellharden
 RUN cargo install shellharden && \

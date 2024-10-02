@@ -1,8 +1,8 @@
 # Build a docker file Ubuntu base image
 # syntax=docker/dockerfile:1
-FROM ghcr.io/marcalva/py_r_base:1.3
+FROM ghcr.io/marcalva/py_r_base:1.4
 
-LABEL version=1.2
+LABEL version=1.3
 
 SHELL ["/bin/bash", "-c"]
 
@@ -12,7 +12,7 @@ USER root
 # CellRanger
 #=======================================
 
-RUN wget -O cellranger-arc-2.0.2.tar.gz "https://cf.10xgenomics.com/releases/cell-arc/cellranger-arc-2.0.2.tar.gz?Expires=1714810668&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZi4xMHhnZW5vbWljcy5jb20vcmVsZWFzZXMvY2VsbC1hcmMvY2VsbHJhbmdlci1hcmMtMi4wLjIudGFyLmd6IiwiQ29uZGl0aW9uIjp7IkRhdGVMZXNzVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzE0ODEwNjY4fX19XX0_&Signature=BnKpOUDtpofzp-wXh-PyMn1Tm9Gox2Kx8LyZ8nlF-FnrGnzLdT6pPYJvJJUhGz8rvvr5sXN6JYYK39~uwVC72yDsvQK6XKf8HH1PcoAL8xUSUwiuvZT9fMO4BIHQb~i56NZ7PM31pkx2VHp9KogDSo4cvjyeJkpOJ1YY4SmnsmffiMNRd9qX1Y3QOAbmNpJg37GN5ng7hoplSGMgpAXrdUSDETID6zR55DkDZkvTtOaMb3OOgSR0trLdFppmWJ7t4nnQwgfCYZbEgaFAXE0IqifiB9xeYkadZX3gKHT3KVb6-K9Fx1WRuid96wIBOFTD6v1m-T6Gbvc-N30zEJxDhA__&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA"
+RUN wget -O cellranger-arc-2.0.2.tar.gz "https://cf.10xgenomics.com/releases/cell-arc/cellranger-arc-2.0.2.tar.gz?Expires=1727885377&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=W7Y8p5AXZl~V4v3UkBa4tAYFMidqaneQjzn48j944Ez20t4PQrWysf5tIuyyp0wmjsi9-Y3hM~ps-ucWb23v0OXXc2ayObMZwe9KA1-Yyx4xflIcMRAR4sqxj8x-h6s7xWLTPIM9Bt9TwG9CytMd3NrSOWGgCREExjlTMZm2sR44R~0CevX5bHhElPV2Sqi-ZjD0D3K0dY83f0i-SsAlmOlQedoDaIKL~FrKVK19kbUu2JajFOqKpqF3hfmGG-ItcXBUl8MOq031wSp1PJVYVrJpYJgydqznepYb9hsKH3EJ3Ht40n-Pa73aNXH16b~j~zcZ2~QI~1WP3My5vALWMg__"
 
 RUN tar -xzf cellranger-arc-2.0.2.tar.gz && \
     rm cellranger-arc-2.0.2.tar.gz && \
