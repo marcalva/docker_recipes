@@ -9,17 +9,6 @@ SHELL ["/bin/bash", "-c"]
 USER root
 
 #=======================================
-# CellRanger
-#=======================================
-
-RUN wget -O cellranger-arc-2.0.2.tar.gz "https://cf.10xgenomics.com/releases/cell-arc/cellranger-arc-2.0.2.tar.gz?Expires=1727885377&Key-Pair-Id=APKAI7S6A5RYOXBWRPDA&Signature=W7Y8p5AXZl~V4v3UkBa4tAYFMidqaneQjzn48j944Ez20t4PQrWysf5tIuyyp0wmjsi9-Y3hM~ps-ucWb23v0OXXc2ayObMZwe9KA1-Yyx4xflIcMRAR4sqxj8x-h6s7xWLTPIM9Bt9TwG9CytMd3NrSOWGgCREExjlTMZm2sR44R~0CevX5bHhElPV2Sqi-ZjD0D3K0dY83f0i-SsAlmOlQedoDaIKL~FrKVK19kbUu2JajFOqKpqF3hfmGG-ItcXBUl8MOq031wSp1PJVYVrJpYJgydqznepYb9hsKH3EJ3Ht40n-Pa73aNXH16b~j~zcZ2~QI~1WP3My5vALWMg__"
-
-RUN tar -xzf cellranger-arc-2.0.2.tar.gz && \
-    rm cellranger-arc-2.0.2.tar.gz && \
-    mv cellranger-arc-2.0.2 /opt/ && \
-    chmod 755 /opt/cellranger-arc-2.0.2
-
-#=======================================
 # R packages
 #=======================================
 
