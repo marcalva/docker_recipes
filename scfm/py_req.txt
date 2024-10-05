@@ -11,13 +11,8 @@ seaborn
 anndata
 scanpy
 loompy
-pyarrow
-cellxgene_census
 scvi-tools
-transformers
-accelerate
 pyaml
-tiledbsoma
 intervaltree
 pyranges >= 0.1.2
 pyBigWig >= 0.1.10
@@ -25,3 +20,9 @@ pyGenomeTracks >= 3.8
 pyfaidx >= 0.8.1.1
 biopython >= 1.84
 pysam
+rotary-embedding-torch
+performer-pytorch
+pytest
+flake8
+boto3
+poetry
