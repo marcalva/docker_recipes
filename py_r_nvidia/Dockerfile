@@ -71,15 +71,12 @@ COPY py_req.txt /opt/py_req.txt
 
 RUN pip install -r /opt/py_req.txt && rm /opt/py_req.txt
 
+RUN echo "getting claude"
 RUN --mount=type=secret,id=github_token \
     export GH_TOKEN=$(cat /run/secrets/github_token) && \
-    if [ -n "${GH_TOKEN}" ]; then \
-        pip install --no-cache-dir git+https://${GH_TOKEN}@github.com/marcalva/claude-chat.git && \
-        pip install --no-cache-dir git+https://${GH_TOKEN}@github.com/marcalva/claude-agent.git && \
-        echo "Successfully installed claude packages"; \
-    else \
-        echo "GitHub token not found or empty. Skipping private package installation."; \
-    fi && \
+    pip install --no-cache-dir git+https://${GH_TOKEN}@github.com/marcalva/claude-chat.git && \
+    claude-chat --initialize && \
+    echo "Successfully installed claude packages" && \
     unset GH_TOKEN
 
 #=================================================
