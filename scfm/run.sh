@@ -5,7 +5,7 @@ if type nvidia-smi &> /dev/null; then
     fi
 fi
 
-sudo docker run --rm $gpus --ipc=host -it --detach-keys="ctrl-^" \
+sudo docker run --rm $gpus --network=host --ipc=host -it --detach-keys="ctrl-^" \
     -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID \
     -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY \
     -e AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION \
