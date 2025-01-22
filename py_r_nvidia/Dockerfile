@@ -71,7 +71,6 @@ COPY py_req.txt /opt/py_req.txt
 
 RUN pip install -r /opt/py_req.txt && rm /opt/py_req.txt
 
-RUN echo "getting claude"
 RUN --mount=type=secret,id=github_token \
     export GH_TOKEN=$(cat /run/secrets/github_token) && \
     pip install --no-cache-dir git+https://${GH_TOKEN}@github.com/marcalva/claude-chat.git && \
