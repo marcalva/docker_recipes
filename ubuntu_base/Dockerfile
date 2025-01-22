@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     tzdata \
     gcc \
+    htop \
+    less \
     clangd \
     man-db \
     manpages \

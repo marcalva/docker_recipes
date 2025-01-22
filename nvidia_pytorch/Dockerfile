@@ -22,6 +22,8 @@ RUN apt-get update && apt-get install -y \
     clangd \
     man-db \
     manpages \
+    htop \
+    less \
     git \
     git-lfs \
     bzip2 \

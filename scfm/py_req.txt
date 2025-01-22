@@ -12,13 +12,19 @@ anndata
 scanpy
 loompy
 scvi-tools
+scarches
+scikit-misc
+snapatac2
+harmonypy >= 0.0.9
+xgboost >= 2.0.0
+celltypist
 pyaml
 intervaltree
-pyranges >= 0.1.2
-pyBigWig >= 0.1.10
-pyGenomeTracks >= 3.8
-pyfaidx >= 0.8.1.1
-biopython >= 1.84
+pyranges
+pyBigWig
+pyGenomeTracks
+pyfaidx
+biopython
 pysam
 rotary-embedding-torch
 performer-pytorch
