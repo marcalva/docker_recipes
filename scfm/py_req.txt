@@ -16,8 +16,8 @@ scarches
 rapids-singlecell
 scikit-misc
 snapatac2
-harmonypy >= 0.0.9
-xgboost >= 2.0.0
+harmonypy
+xgboost
 celltypist
 pyaml
 intervaltree
