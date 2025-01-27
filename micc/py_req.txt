@@ -17,7 +17,6 @@ ipython >= 8.24.0
 intervaltree >= 3.1.0
 pyranges >= 0.1.2
 bbknn
-scvi-tools
 scarches
 scikit-misc
 cellxgene-census

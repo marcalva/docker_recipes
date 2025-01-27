@@ -25,6 +25,16 @@ COPY py_req.txt /opt/py_req.txt
 RUN pip install -r /opt/py_req.txt && rm /opt/py_req.txt
 
 #=======================================
+# scvi-tools
+#=======================================
+
+RUN git clone -b can_multivi2 --recursive https://github.com/scverse/scvi-tools.git && \
+    cd scvi-tools && \
+    sudo pip install . && \
+    cd ../ && \
+    rm -rf scvi-tools
+
+#=======================================
 # bedtools
 #=======================================
 
@@ -138,7 +148,7 @@ USER ubuntu
 # requires mamba env
 ENV MAMBA_ROOT_PREFIX="/home/ubuntu/.mamba"
 RUN eval "$(micromamba shell hook --shell bash)" && \
-    micromamba create -n scenicplus python=3.11 -y -c conda-forge && \
+    micromamba create -n scenicplus python=3.11.0 -y -c conda-forge && \
     micromamba activate scenicplus && \
     git clone https://github.com/aertslab/scenicplus.git && \
     cd scenicplus && \
