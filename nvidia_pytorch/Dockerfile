@@ -89,7 +89,7 @@ RUN npm i -g bash-language-server
 RUN pip install basedpyright flake8 black neovim
 
 # neovim
-RUN wget https://github.com/neovim/neovim/releases/download/v0.10.1/nvim-linux64.tar.gz && \
+RUN wget https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux64.tar.gz && \
     tar -C /opt -xzf nvim-linux64.tar.gz && \
     ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim && \
     rm nvim-linux64.tar.gz
